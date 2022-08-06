@@ -12,6 +12,7 @@ import { Register } from './components/Register/Register';
 import { Logout } from './components/Logout/Logout';
 import { OrderPage } from './components/Orders/OrderPage/OrderPage';
 import { OrderForm } from './components/Orders/OrderForm/OrderForm';
+import { CreateOrder } from './components/Orders/CreateOrder/CreateOrder';
 
 function App() {
   return (
@@ -31,7 +32,7 @@ function App() {
         <OrderProvider>
           <Routes>
               <Route path="/orders" element={<OrderPage />} />
-              <Route path="/orders/create" element={<OrderForm />} />
+              <Route path="/orders/create" element={<CreateOrder />} />
           </Routes>
         </OrderProvider>
 

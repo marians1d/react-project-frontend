@@ -9,6 +9,8 @@ const orderReducer = (state, action) => {
     switch (action.type) {
         case 'ADD_ORDERS':
             return action.payload.map(o => ({...o, comments: []}));
+        case 'ADD_ORDER':
+            return [...state, action.payload];
         default:
             return state;
     }
@@ -32,9 +34,19 @@ export const OrderProvider = ({
             });
     }, []);
 
+    const addOrder = (orderData) => {
+        dispatch({
+            type: 'ADD_ORDER',
+            payload: orderData,
+        });
+
+        navigate('/orders');
+    };
+
     return (
         <OrderContext.Provider value={{
             orders,
+            addOrder
         }}>
             {children}
         </OrderContext.Provider>

@@ -1,26 +1,24 @@
 // import { useOrderContext } from '../../../contexts/Order';
 import { useFormFields } from '../../../hooks//useFormFields';
 
-export const OrderForm = () => {
-    // const { orders } = useOrderContext();
+export const OrderForm = ({ submitHandler }) => {
     const [fields, handleFieldChange] = useFormFields({
         title: '',
         description: '',
         address: '',
         imageUrl: '',
-        visibility: '',
+        visibility: 'public',
     });
 
-    const orderHandler = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log(fields);
+        submitHandler(e, fields);
     };
-
 
     return (
         <div>
-            <form onSubmit={orderHandler}>
+            <form onSubmit={handleSubmit}>
                 <label htmlFor="title">Заглавие</label>
                 <input value={fields.title} onChange={handleFieldChange} id='title' type="text" />
                 <label htmlFor="description">Описание</label>
@@ -30,8 +28,7 @@ export const OrderForm = () => {
                 <label htmlFor="image">Снимка</label>
                 <input value={fields.imageUrl} onChange={handleFieldChange} id='imageUrl' type="text" />
 
-                <div onChange={handleFieldChange}>
-                    
+                <div>
                     <label>
                         <input defaultChecked onChange={handleFieldChange} type="radio" value='public' id='visibility' name='visibility' />
                         Публична
