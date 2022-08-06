@@ -15,8 +15,9 @@ export const Header = () => {
                 </Link>
 
                 <ul className={styles.links}>
-                    <li><NavLink to="/" ><em>Home</em></NavLink></li>
-                    <li><NavLink to="/about">About</NavLink></li>
+                    <li><NavLink to="/" >Начало</NavLink></li>
+                    <li><NavLink to="/orders" >Поръчки</NavLink></li>
+                    <li><NavLink to="/about">За Нас</NavLink></li>
                 </ul>
 
                 <div className={styles.actions}>
