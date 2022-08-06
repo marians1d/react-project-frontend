@@ -5,16 +5,17 @@ const fetcher = async (method, url, data) => {
         const user = localStorage.getItem('auth');
         const auth = JSON.parse(user || '{}');
 
-        let headers;
+        let headers = {};
         if (auth.accessToken) {
             headers['x-authorization'] = auth.accessToken;
         }
         
-        let options = {};
+        let options = { method };
         if (method === 'GET') {
-            options = { headers };
+            options.headers = headers;
         } else {
             options = {
+                method,
                 headers: {
                     ...headers,
                     'content-type': 'application/json'
