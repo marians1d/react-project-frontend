@@ -1,4 +1,6 @@
-import { createContext, useContext} from 'react';
+import { createContext } from 'react';
+
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 export const AuthContext = createContext();
 
@@ -9,11 +11,11 @@ export const AuthProvider = ({
 
     const loginUser = (userData) => {
         setAuth(userData);
-    }
+    };
 
     const logoutUser = () => {
         setAuth({});
-    }
+    };
 
     return (
         <AuthContext.Provider value={{
@@ -24,5 +26,5 @@ export const AuthProvider = ({
         }} >
             {children}
         </AuthContext.Provider>
-    )
-}
+    );
+};
