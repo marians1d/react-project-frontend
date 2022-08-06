@@ -1,20 +1,21 @@
-import { useContext, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 
-import { AuthContext } from '../../contexts/Auth';
+import { useAuthContext } from '../../contexts/Auth';
 import * as authService from '../../services/auth';
 
 export const Logout = () => {
-    const { logoutUser } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const { logoutUser } = useAuthContext();
 
     useEffect(() => {
         authService.logout()
             .then(() => {
                 logoutUser();
-                return <Navigate to={'/'} replace />;
+                navigate('/', { replace: true });
             })
             .catch(() => {
-                return <Navigate to={'/'} replace />;
+                navigate('/', { replace: true });
             });
     });
 

@@ -20,22 +20,19 @@ function App() {
       <div className="App">
         <Header />
 
-        
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
-        </Routes>
 
         <OrderProvider>
           <Routes>
-              <Route path="/orders" element={<OrderPage />} />
-              <Route path="/orders/create" element={<CreateOrder />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/logout" element={<Logout />} />
+
+            <Route path="/orders" element={<OrderPage />} />
+            <Route path="/orders/create" element={<CreateOrder />} />
           </Routes>
         </OrderProvider>
-
       </div>
     </AuthProvider>
   );
