@@ -1,7 +1,9 @@
-import { useEffect, useReducer } from 'react';
+import { createContext, useContext, useEffect, useReducer } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import * as orderService from '../services/order';
+
+export const OrderContext = createContext();
 
 const orderReducer = (state, action) => {
     switch (action.type) {
@@ -29,4 +31,18 @@ export const OrderProvider = ({
                 dispatch(action);
             });
     }, []);
+
+    return (
+        <OrderContext.Provider value={{
+            orders,
+        }}>
+            {children}
+        </OrderContext.Provider>
+    );
+};
+
+export const useOrderContext = () => {
+    const context = useContext(OrderContext);
+
+    return context;
 };
