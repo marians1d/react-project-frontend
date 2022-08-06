@@ -1,15 +1,33 @@
 import { useState } from 'react';
 
-export const Login = () => {
 
+
+export const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const emailChange = (event) => {
+        setEmail(event.target.value);
+    };
+
+    const passwordChange = (event) => {
+        setPassword(event.target.value);
+    };
+
+    const loginHandler = (event) => {
+        event.preventDefault();
+        
+
+    };
 
     return (
         <div>
-            <form>
-                <label htmlFor="username">Потребителско Име</label>
-                <input id='username' type="text" />
+            <form onSubmit={loginHandler}>
+                <h2>{email}</h2>
+                <label htmlFor="email">Имейл</label>
+                <input value={email} onChange={emailChange} id='email' type="text" />
                 <label htmlFor="password">Парола</label>
-                <input id='password' type="password" />
+                <input value={password} onChange={passwordChange} id='password' type="password" />
 
                 <button>Влез</button>
             </form>
