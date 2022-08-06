@@ -27,10 +27,15 @@ const fetcher = async (method, url, data) => {
 
         const response = await fetch(`${baseUrl}${url}`, options);
 
+        if (response.status === 204) {
+            return { success: true };
+        }
+
         const result = await response.json();
 
         return result;
     } catch (err) {
+        console.log('here');
         console.error(err);
     }
 };
