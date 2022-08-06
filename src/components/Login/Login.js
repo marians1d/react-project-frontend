@@ -1,5 +1,7 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { useFormFields } from '../../hooks/useFormFields';
 
 import { AuthContext } from '../../contexts/Auth';
 import * as authService from '../../services/auth';
@@ -8,21 +10,15 @@ export const Login = () => {
     const { loginUser } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
-    const emailChange = (event) => {
-        setEmail(event.target.value);
-    };
-
-    const passwordChange = (event) => {
-        setPassword(event.target.value);
-    };
+    const [fields, handleFieldChange] = useFormFields({
+        email: '',
+        password: ''
+    });
 
     const loginHandler = (event) => {
         event.preventDefault();
         
-        authService.login(email, password)
+        authService.login(fields.email, fields.password)
             .then(authData => {
                 loginUser(authData);
                 navigate('/');
@@ -37,9 +33,9 @@ export const Login = () => {
         <div>
             <form onSubmit={loginHandler}>
                 <label htmlFor="email">Имейл</label>
-                <input value={email} onChange={emailChange} id='email' type="text" />
+                <input value={fields.email} onChange={handleFieldChange} id='email' type="text" />
                 <label htmlFor="password">Парола</label>
-                <input value={password} onChange={passwordChange} id='password' type="password" />
+                <input value={fields.password} onChange={handleFieldChange} id='password' type="password" />
 
                 <button>Влез</button>
             </form>
