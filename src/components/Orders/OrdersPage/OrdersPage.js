@@ -1,6 +1,6 @@
 import { OrderList } from '../OrderList/OrderList';
 
-export const OrderPage = () => {
+export const OrdersPage = () => {
     return (
         <div className="order-page">
             <OrderList />

@@ -1,8 +1,8 @@
 // import { useOrderContext } from '../../../contexts/Order';
 import { useFormFields } from '../../../hooks//useFormFields';
 
-export const OrderForm = ({ submitHandler }) => {
-    const [fields, handleFieldChange] = useFormFields({
+export const OrderForm = ({ submitHandler, order }) => {
+    const [fields, handleFieldChange] = useFormFields(order || {
         title: '',
         description: '',
         address: '',
