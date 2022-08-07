@@ -44,4 +44,4 @@ export const get = fetcher.bind(null, 'GET');
 export const post = fetcher.bind(null, 'POST');
 export const patch = fetcher.bind(null, 'PATCH');
 export const put = fetcher.bind(null, 'PUT');
-export const del = fetcher.bind(null, 'DEL');
+export const del = fetcher.bind(null, 'DELETE');
