@@ -1,3 +1,9 @@
+:root {
+  --primary-black: #191919;
+  --main-gray: #6B6B7F;
+  --main-gray-2: #E8E8E8; 
+}
+
 /* Box sizing rules */
 *,
 *::before,
@@ -34,9 +40,7 @@ html:focus-within {
 /* Set core body defaults */
 body {
   font-family: Roboto, sans-serif;
-  min-height: 100vh;
   text-rendering: optimizeSpeed;
-  line-height: 1.5;
 }
 
 /* A elements that don't have a class get default styles */
@@ -78,4 +82,26 @@ select {
 a {
   text-decoration: none;
   color: unset;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: var(--primary-black);
+  color: white;
+}
+
+.btn-secondary {
+  color: var(--primary-black);
+  border: 2px solid black;
+}
+
+.main {
+  margin-top: 4rem;
 }

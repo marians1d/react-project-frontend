@@ -1,4 +1,3 @@
-// import { useOrderContext } from '../../../contexts/Order';
 import { useFormFields } from '../../../hooks//useFormFields';
 
 export const OrderForm = ({ submitHandler, order }) => {
@@ -13,7 +12,7 @@ export const OrderForm = ({ submitHandler, order }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        submitHandler(e, fields);
+        submitHandler(fields);
     };
 
     return (

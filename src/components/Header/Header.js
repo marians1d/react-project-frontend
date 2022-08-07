@@ -1,8 +1,9 @@
 import { NavLink, Link } from 'react-router-dom';
 import { useAuthContext } from '../../contexts/Auth';
 import styles from './Header.module.css';
+import { Profile } from './Profile/Profile';
 
-export const Header = () => {
+export const Header = () => {   
     const { user } = useAuthContext();
 
     return (
@@ -15,35 +16,52 @@ export const Header = () => {
                 </Link>
 
                 <ul className={styles.links}>
-                    <li><NavLink to="/" >Начало</NavLink></li>
-                    <li><NavLink to="/orders" >Поръчки</NavLink></li>
-                    <li><NavLink to="/about">За Нас</NavLink></li>
+                    <li>
+                        <NavLink
+                            className={({ isActive }) =>
+                                isActive ? styles.active : undefined
+                            }
+                            to="/"
+                        >
+                            Начало
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            className={({ isActive }) =>
+                                isActive ? styles.active : undefined
+                            }
+                            to="/orders"
+                        >
+                            Поръчки
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            className={({ isActive }) =>
+                                isActive ? styles.active : undefined
+                            }
+                            to="/about"
+                        >
+                            За Нас
+                        </NavLink>
+                    </li>
                 </ul>
 
                 <div className={styles.actions}>
                     {user.email
-                        ? <>
-                            <Link to="/profile">
-                                <p>
-                                    Профил
-                                </p>
+                        ? <div className={styles.right}>
+                            <Link className={'btn btn-primary'} to='/orders/create'>
+                                Поръчай
                             </Link>
-                            <Link to="/logout">
-                                <p>
-                                    Излез
-                                </p>
-                            </Link>
-                        </>
+                            <Profile />
+                        </div>
                         : <>
-                            <Link to="/login">
-                                <p>
-                                    Вход
-                                </p>
+                            <Link className={'btn btn-secondary'} to="/login">
+                                Вход
                             </Link>
-                            <Link to="/register">
-                                <p>
-                                    Регистрация
-                                </p>
+                            <Link className={'btn btn-primary'} to="/register">
+                                Регистрация
                             </Link>
                         </>}
 

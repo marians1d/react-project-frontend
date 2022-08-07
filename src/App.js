@@ -14,6 +14,7 @@ import { OrdersPage } from './components/Orders/OrdersPage/OrdersPage';
 import { CreateOrder } from './components/Orders/CreateOrder/CreateOrder';
 import { OrderDetails } from './components/Orders/OrderDetails/OrderDetails';
 import { EditOrder } from './components/Orders/EditOrder/EditOrder';
+import { NoMatch } from './components/NoMatch';
 
 function App() {
   return (
@@ -21,21 +22,23 @@ function App() {
       <div className="App">
         <Header />
 
+        <main className='main'>
+          <OrderProvider>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/logout" element={<Logout />} />
 
-        <OrderProvider>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/logout" element={<Logout />} />
-
-            <Route path="/orders" element={<OrdersPage />} />
-            <Route path="/orders/create" element={<CreateOrder />} />
-            <Route path="/orders/:orderId" element={<OrderDetails />} />
-            <Route path="/orders/:orderId/edit" element={<EditOrder />} />
-          </Routes>
-        </OrderProvider>
+              <Route path="/orders" element={<OrdersPage />} />
+              <Route path="/orders/create" element={<CreateOrder />} />
+              <Route path="/orders/:orderId" element={<OrderDetails />} />
+              <Route path="/orders/:orderId/edit" element={<EditOrder />} />
+              <Route path="*" element={<NoMatch />} />
+            </Routes>
+          </OrderProvider>
+        </main>
       </div>
     </AuthProvider>
   );

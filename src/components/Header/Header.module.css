@@ -1,13 +1,17 @@
 .header-wrapper {
+    position: fixed;
+    top: 0;
     width: 100%;
     height: 4rem;
     display: flex;
     justify-content: center;
+    background-color: rgba(255, 255, 255, 0.7);
 }
 
 .header {
+    font-weight: 700;
     width: 100%;
-    max-width: 1000px;
+    max-width: 1300px;
     padding-left: 40px;
     padding-right: 40px;
     height: 4rem;
@@ -20,11 +24,27 @@
     font-family: 'Lobster', monospace;
 }
 
-.actions, .links {
+.actions, .links, .right {
     display: flex;
-    gap: 1.2rem
+    gap: 1.2rem;
+    color: var(--main-gray);
 }
 
-.actions {
+.active {
+    color: var(--primary-black);
+    position: relative;
+}
 
+.active::after {
+    content: '';
+    background-color: var(--primary-black);
+    right: 0;
+    width: 70%;
+    height: 1px;
+    position: absolute;
+    display: block;
+}
+
+.link {
+    color: var(--primary-black);
 }

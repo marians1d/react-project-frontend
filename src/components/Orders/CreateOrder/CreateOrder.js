@@ -10,9 +10,7 @@ export const CreateOrder = () => {
     const navigate = useNavigate();
     const { addOrder } = useOrderContext();
 
-    const orderHandler = (e, fields) => {
-        e.preventDefault();
-
+    const orderHandler = (fields) => {
         orderService.create(fields)
             .then((data) => {
                 addOrder(data);
