@@ -1,0 +1,8 @@
+.order-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    justify-content: flex-start;
+    gap: 30px;
+    max-width: 1200px;
+}

@@ -30,11 +30,11 @@ export const Register = () => {
                 <h4>Регистрация</h4>
                 <form onSubmit={registerHandler}>
                     <label htmlFor="username">Потребителско име</label>
-                    <input value={fields.username} placeholder='Иван Вазов' onChange={handleFieldChange} id='username' type="text" />
+                    <input value={fields.username} onChange={handleFieldChange} id='username' type="text" />
                     <label htmlFor="email">Имейл</label>
-                    <input value={fields.email} placeholder='ivan@abv.bg' onChange={handleFieldChange} id='email' type="text" />
+                    <input value={fields.email} onChange={handleFieldChange} id='email' type="text" />
                     <label htmlFor="password">Парола</label>
-                    <input value={fields.password} placeholder='12345678' onChange={handleFieldChange} id='password' type="password" />
+                    <input value={fields.password} onChange={handleFieldChange} id='password' type="password" />
 
                     <button className='btn btn-primary'>Регистрирай се</button>
 

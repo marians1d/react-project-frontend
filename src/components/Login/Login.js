@@ -22,8 +22,10 @@ export const Login = () => {
 
         authService.login(fields.email, fields.password)
             .then(authData => {
-                loginUser(authData);
-                navigate('/');
+                if (authData.status !== 'error') {
+                    loginUser(authData);
+                    navigate('/');
+                }
             })
             .catch((error) => {
                 console.log(error);

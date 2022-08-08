@@ -26,7 +26,7 @@ export const CreateOrder = () => {
 
     return (
         <div>
-            <OrderForm submitHandler={orderHandler} />
+            <OrderForm type={'create'} submitHandler={orderHandler} />
         </div>
     );
 };

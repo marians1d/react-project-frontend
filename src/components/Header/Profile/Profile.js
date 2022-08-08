@@ -12,11 +12,11 @@ export const Profile = () => {
 
     return (
         <div className={styles.profile}>
-            <button className={styles.icon} onClick={handleDropdown}>
+            <button className={styles.icon} onClick={handleDropdown} >
                 <FontAwesomeIcon icon={faUserAstronaut} />
             </button>
 
-            {showDropdown && <div className={styles.dropdown}>
+            {showDropdown && <div className={styles.dropdown} onBlur={handleDropdown}>
                 <Link className={styles.link} to='/profile'>
                     Профил
                 </Link>
