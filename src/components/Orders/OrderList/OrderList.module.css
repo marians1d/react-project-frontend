@@ -6,3 +6,11 @@
     gap: 30px;
     max-width: 1200px;
 }
+
+.order-list > h3 {
+    width: 100%;
+    font-size: 1.5rem;
+    display: block;
+    text-align: center;
+    margin-top: 50px;
+}
