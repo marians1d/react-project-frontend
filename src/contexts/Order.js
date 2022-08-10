@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useReducer } from 'react';
+import { createContext, useContext, useEffect, useReducer, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import * as orderService from '../services/order';
@@ -23,10 +23,13 @@ const orderReducer = (state, action) => {
 export const OrderProvider = ({
     children
 }) => {
+    const [isLoading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [orders, dispatch] = useReducer(orderReducer, []);
 
     useEffect(() => {
+        setLoading(true);
+
         orderService.getAll()
             .then(result => {
                 const action = {
@@ -35,6 +38,8 @@ export const OrderProvider = ({
                 };
 
                 dispatch(action);
+
+                setLoading(false);
             });
     }, []);
 
@@ -68,6 +73,7 @@ export const OrderProvider = ({
 
     return (
         <OrderContext.Provider value={{
+            isLoading,
             orders,
             addOrder,
             selectOrder,

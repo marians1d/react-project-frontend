@@ -31,11 +31,14 @@ const fetcher = async (method, url, data) => {
             return { success: true };
         }
 
+        if (response.status === 401) {
+            return localStorage.clear('auth');
+        }
+
         const result = await response.json();
 
         return result;
     } catch (err) {
-        console.log('here');
         console.error(err);
     }
 };
