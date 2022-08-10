@@ -15,8 +15,6 @@ export const CreateOrder = () => {
             .then((data) => {
                 addOrder(data);
 
-                console.log(data);
-                
                 navigate(`/orders/${data._id}`);
             })
             .catch(() => {

@@ -15,6 +15,8 @@ const orderReducer = (state, action) => {
             return state.map(x => x._id === action.orderId ? action.payload : x);
         case 'REMOVE_ORDER':
             return state.filter(x => x._id !== action.orderId);
+        case 'EDIT_ORDER':
+            return state.map(x => x._id === action.gameId ? action.payload : x);
         default:
             return state;
     }
@@ -66,6 +68,14 @@ export const OrderProvider = ({
         navigate('/orders');
     }, [navigate]);
 
+    const editOrder = useCallback((orderId, orderData) => {
+        dispatch({
+            type: 'EDIT_ORDER',
+            payload: orderData,
+            orderId,
+        });
+    }, []);
+
     const removeOrder = useCallback((orderId) => {
         dispatch({
             type: 'REMOVE_ORDER',
@@ -78,6 +88,7 @@ export const OrderProvider = ({
             isLoading,
             orders,
             addOrder,
+            editOrder,
             selectOrder,
             fetchOrderDetails,
             removeOrder
