@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useReducer, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useReducer, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import * as orderService from '../services/order';
@@ -43,33 +43,35 @@ export const OrderProvider = ({
             });
     }, []);
 
-    const selectOrder = (orderId) => {
-        return orders.find(x => x._id === orderId) || {};
-    };
+    
 
-    const fetchOrderDetails = async (orderId, orderDetails) => {
+    const selectOrder = useCallback((orderId) => {
+        return orders.find(x => x._id === orderId) || {};
+    }, [orders]);
+
+    const fetchOrderDetails =  useCallback(async (orderId, orderDetails) => {
         dispatch({
             type: 'FETCH_ORDER_DETAILS',
             payload: orderDetails,
             orderId,
         });
-    };
+    }, []);
 
-    const addOrder = (orderData) => {
+    const addOrder = useCallback((orderData) => {
         dispatch({
             type: 'ADD_ORDER',
             payload: orderData,
         });
 
         navigate('/orders');
-    };
+    }, [navigate]);
 
-    const removeOrder = (orderId) => {
+    const removeOrder = useCallback((orderId) => {
         dispatch({
             type: 'REMOVE_ORDER',
             payload: orderId,
         });
-    };
+    }, []);
 
     return (
         <OrderContext.Provider value={{

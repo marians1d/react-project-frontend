@@ -3,7 +3,7 @@ import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useAuthContext } from '../../../contexts/Auth';
 
 import { useOrderContext } from '../../../contexts/Order';
-import * as orderService from '../../../services/order'
+import * as orderService from '../../../services/order';
 
 export const OrderDetails = () => {
     const navigate = useNavigate();
@@ -24,7 +24,7 @@ export const OrderDetails = () => {
 
             fetchOrderDetails(orderId, order);
         });
-    }, []);
+    }, [orderId, fetchOrderDetails]);
 
     const orderDeleteHandler = () => {
         const confirmation = window.confirm('Are you sure you want to delete this game?');
@@ -43,8 +43,10 @@ export const OrderDetails = () => {
         <div>
             <h2>{currentOrder.title}</h2>
 
-            <Link to={`/orders/${currentOrder._id}/edit`}>Редактиране</Link>
-            <button onClick={orderDeleteHandler}>Изтрий</button>
+            {isOwner && <>
+                <Link to={`/orders/${currentOrder._id}/edit`}>Редактиране</Link>
+                <button onClick={orderDeleteHandler}>Изтрий</button>
+            </>}
         </div>
     );
 };
