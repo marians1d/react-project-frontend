@@ -1,7 +1,7 @@
 import { useFormFields } from '../../../hooks//useFormFields';
 import styles from './OrderForm.module.css';
 
-export const OrderForm = ({ type, submitHandler, order }) => {
+export const OrderForm = ({ type, submitHandler, order, title }) => {
     const [fields, handleFieldChange] = useFormFields(order || {
         title: '',
         description: '',
@@ -19,7 +19,7 @@ export const OrderForm = ({ type, submitHandler, order }) => {
     return (
         <div className={styles['form-wrap']}>
             <div className={styles.form}>
-                <h4>{type === 'create' ? 'Създай Поръчка' : 'Поправи Поръчка'}</h4>
+                <h4>{title}</h4>
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="title">Заглавие</label>
                     <input value={fields.title} onChange={handleFieldChange} id='title' type="text" />

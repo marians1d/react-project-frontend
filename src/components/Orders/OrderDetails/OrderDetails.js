@@ -5,6 +5,8 @@ import { useAuthContext } from '../../../contexts/Auth';
 import { useOrderContext } from '../../../contexts/Order';
 import * as orderService from '../../../services/order';
 
+import styles from './OrderDetails.module.css';
+
 export const OrderDetails = () => {
     const navigate = useNavigate();
     const { selectOrder, fetchOrderDetails, removeOrder } = useOrderContext();
@@ -14,7 +16,7 @@ export const OrderDetails = () => {
 
     const currentOrder = selectOrder(orderId);
 
-    const isOwner = currentOrder._ownerId === user._id;
+    const isOwner = currentOrder.ownerId === user._id;
 
     useEffect(() => {
         Promise.all([
@@ -40,13 +42,23 @@ export const OrderDetails = () => {
 
 
     return (
-        <div>
-            <h2>{currentOrder.title}</h2>
+        <div className={styles.container}>
+            <section className={styles.details}>
+                <div className={styles.image}>
+                    <img src={currentOrder.imageUrl} alt={currentOrder.title} />
+                </div>
 
-            {isOwner && <>
-                <Link to={`/orders/${currentOrder._id}/edit`}>Редактиране</Link>
-                <button onClick={orderDeleteHandler}>Изтрий</button>
-            </>}
+                <div className={styles.info}>
+                    <h2>{currentOrder.title}</h2>
+
+                    <p>{currentOrder.description}</p>
+
+                    {isOwner && <div className={styles.actions}>
+                        <Link className='btn btn-primary' to={`/orders/${currentOrder._id}/edit`}>Редактиране</Link>
+                        <button className='btn btn-primary' onClick={orderDeleteHandler}>Изтрий</button>
+                    </div>}
+                </div>
+            </section>
         </div>
     );
 };
