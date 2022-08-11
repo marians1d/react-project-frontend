@@ -1,5 +1,6 @@
 :root {
   --primary-black: #191919;
+  --primary-black-2: #2d2d2d;
   --main-gray: #6B6B7F;
   --main-gray-2: #E8E8E8; 
 }
@@ -97,11 +98,24 @@ a {
 .btn-primary {
   background-color: var(--primary-black);
   color: white;
+
+  transition: background-color 400ms;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-black-2);
 }
 
 .btn-secondary {
   color: var(--primary-black);
   border: 2px solid black;
+
+  transition: background-color 400ms, color 400ms;
+}
+
+.btn-secondary:hover {
+  color: #fff;
+  background-color: var(--primary-black-2);
 }
 
 .main {

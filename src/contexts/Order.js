@@ -16,7 +16,7 @@ const orderReducer = (state, action) => {
         case 'REMOVE_ORDER':
             return state.filter(x => x._id !== action.orderId);
         case 'EDIT_ORDER':
-            return state.map(x => x._id === action.gameId ? action.payload : x);
+            return state.map(x => x._id === action.orderId ? action.payload : x);
         default:
             return state;
     }

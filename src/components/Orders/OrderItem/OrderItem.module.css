@@ -5,6 +5,12 @@
     flex-direction: column;
     background-color: var(--main-gray-2);
     border: 2px solid black;
+    transition: box-shadow 500ms, transform 500ms;
+}
+
+.order-card:hover {
+    box-shadow: 2px 2px 4px 1px gray;
+    transform: scale(1.05);
 }
 
 .image {

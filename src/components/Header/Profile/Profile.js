@@ -8,15 +8,25 @@ import { Link } from 'react-router-dom';
 export const Profile = () => {
     const [showDropdown, setDropdown] = useState(false);
 
-    const handleDropdown = () => setDropdown((old) => !old);
+    const toggleDropdown = () => setDropdown((old) => !old);
+
+    const close = () => {
+        setDropdown(false);
+    };
+
+    const expand = () => {
+        setDropdown(true);
+    };
 
     return (
         <div className={styles.profile}>
-            <button className={styles.icon} onClick={handleDropdown} >
+            <button className={styles.icon} onClick={toggleDropdown} >
                 <FontAwesomeIcon icon={faUserAstronaut} />
             </button>
 
-            {showDropdown && <div className={styles.dropdown} onBlur={handleDropdown}>
+            {showDropdown && <div className={styles.dropdown} onBlur={close}>
+                <div onClick={close} className={styles.background}></div>
+
                 <Link className={styles.link} to='/profile'>
                     Профил
                 </Link>

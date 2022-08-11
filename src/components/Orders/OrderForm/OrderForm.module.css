@@ -56,10 +56,9 @@
 }
 
 .form button {
-    width: 50%;
     justify-content: center;
     cursor: pointer;
-
+    align-self: baseline;
     margin-bottom: 20px;
 }
 
