@@ -5,6 +5,7 @@
     justify-content: flex-start;
     gap: 30px;
     max-width: 1200px;
+    padding: 30px;
 }
 
 .order-list > h3 {

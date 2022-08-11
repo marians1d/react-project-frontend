@@ -31,19 +31,36 @@
     color: var(--main-gray);
 }
 
+.links a {
+    transition: color 400ms;
+}
+
+.links a::after {
+    content: '';
+    background-color: var(--primary-black);
+    right: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    position: absolute;
+    display: block;
+}
+
+.links a:hover {
+    color: var(--primary-black);
+}
+
+.link a:hover:after {
+    width: 70%;
+}
+
 .active {
     color: var(--primary-black);
     position: relative;
 }
 
-.active::after {
-    content: '';
-    background-color: var(--primary-black);
-    right: 0;
+.links .active::after {
     width: 70%;
-    height: 1px;
-    position: absolute;
-    display: block;
 }
 
 .link {
