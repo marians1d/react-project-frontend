@@ -12,7 +12,10 @@ export const OrdersPage = () => {
 
     return (
         <div className="order-page">
-            <Search submitHandler={submitHandler} suggestionsHandler={suggestionsHandler} />
+            <Search
+                submitHandler={submitHandler}
+                suggestionsHandler={suggestionsHandler}
+            />
             <OrderList />
         </div>
     );

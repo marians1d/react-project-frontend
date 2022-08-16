@@ -1,17 +1,18 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-import { useAuthContext } from '../../contexts/Auth';
+import { logout } from '../../features/auth/authSlice';
 import * as authService from '../../services/auth';
 
 export const Logout = () => {
     const navigate = useNavigate();
-    const { logoutUser } = useAuthContext();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         authService.logout()
             .then(() => {
-                logoutUser();
+                dispatch(logout());
                 navigate('/', { replace: true });
             })
             .catch(() => {

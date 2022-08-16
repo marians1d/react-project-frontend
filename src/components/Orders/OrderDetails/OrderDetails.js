@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
-import { useAuthContext } from '../../../contexts/Auth';
+import { useSelector } from 'react-redux';
 
 import { useOrderContext } from '../../../contexts/Order';
 import * as orderService from '../../../services/order';
@@ -11,7 +11,7 @@ export const OrderDetails = () => {
     const navigate = useNavigate();
     const { selectOrder, fetchOrderDetails, removeOrder, editOrder } = useOrderContext();
     const { orderId } = useParams();
-    const { user } = useAuthContext();
+    const user = useSelector(state => state.user.value);
 
 
     const currentOrder = selectOrder(orderId);

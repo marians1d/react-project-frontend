@@ -14,10 +14,6 @@ export const Profile = () => {
         setDropdown(false);
     };
 
-    const expand = () => {
-        setDropdown(true);
-    };
-
     return (
         <div className={styles.profile}>
             <button className={styles.icon} onClick={toggleDropdown} >
