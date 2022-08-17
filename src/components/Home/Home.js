@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import styles from './Home.module.css';
 
 export const Home = () => {
-    const user = useSelector(state => state.user.value);
+    const user = useSelector(state => state.user);
 
     return (
         <section className="">

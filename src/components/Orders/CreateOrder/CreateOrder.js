@@ -1,19 +1,19 @@
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import { OrderForm } from '../OrderForm/OrderForm';
 import * as orderService from '../../../services/order';
-
-import { useOrderContext } from '../../../contexts/Order';
-
+import { addOne } from '../../../features/order/orderSlice';
 
 export const CreateOrder = () => {
     const navigate = useNavigate();
-    const { addOrder } = useOrderContext();
+    const dispatch = useDispatch();
+
 
     const orderHandler = (fields) => {
         orderService.create(fields)
             .then((data) => {
-                addOrder(data);
+                dispatch(addOne(data));
 
                 navigate(`/orders/${data._id}`);
             })

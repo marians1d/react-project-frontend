@@ -1,11 +1,11 @@
-import { useOrderContext } from '../../../contexts/Order';
+import { useSelector } from 'react-redux';
 import { OrderItem } from '../OrderItem/OrderItem';
 import { ClipLoader } from 'react-spinners';
 
 import styles from './OrderList.module.css';
 
 export const OrderList = () => {
-    const { orders, isLoading } = useOrderContext();
+    const { orders, isLoading } = useSelector(state => state.orders);
 
     let component;
 

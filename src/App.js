@@ -1,7 +1,5 @@
 import './App.css';
 
-import { OrderProvider } from './contexts/Order';
-
 import { Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header/Header';
 import { Home } from './components/Home/Home';
@@ -21,21 +19,19 @@ function App() {
       <Header />
 
       <main className='main'>
-        <OrderProvider>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/logout" element={<Logout />} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
 
-            <Route path="/orders" element={<OrdersPage />} />
-            <Route path="/orders/create" element={<CreateOrder />} />
-            <Route path="/orders/:orderId" element={<OrderDetails />} />
-            <Route path="/orders/:orderId/edit" element={<EditOrder />} />
-            <Route path="*" element={<NoMatch />} />
-          </Routes>
-        </OrderProvider>
+          <Route path="/orders" element={<OrdersPage />} />
+          <Route path="/orders/create" element={<CreateOrder />} />
+          <Route path="/orders/:orderId" element={<OrderDetails />} />
+          <Route path="/orders/:orderId/edit" element={<EditOrder />} />
+          <Route path="*" element={<NoMatch />} />
+        </Routes>
       </main>
     </div>
   );

@@ -1,20 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const initialState = {
+    orders: [],
+    isLoading: true,
+};
+
 export const orderSlice = createSlice({
     name: 'order',
-    initialState: [],
+    initialState,
     reducers: {
         addAll: (state, action) => {
-            state = action.payload.map(o => ({...o, comments: []}));
+            state.orders = action.payload.map(o => ({...o, comments: []}));
         },
         addOne: (state, action) => {
-            state = [...state, action.payload ];
+            state.orders.push(action.payload);
         },
-        addDetails: (state, action) => {
-            state = state.map(x => x._id === action.orderId ? action.payload : x);
+        edit: (state, action) => {
+            state.orders = state.orders.map(x => x._id === action.payload._id ? action.payload : x);
         },
         remove: (state, action) => {
-            
-        }
+            state.orders = state.orders.filter(x => x._id !== action.payload._id);
+        },
+        setLoading: (state, action) => {
+            state.isLoading = action.payload;
+        } 
     }
 });
+
+export const { addAll, addOne, edit, addDetails, remove, setLoading } = orderSlice.actions;
+
+export default orderSlice.reducer;

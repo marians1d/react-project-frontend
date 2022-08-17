@@ -4,7 +4,7 @@ import styles from './Header.module.css';
 import { Profile } from './Profile/Profile';
 
 export const Header = () => {   
-    const user = useSelector(state => state.user.value);
+    const user = useSelector(state => state.user);
 
     return (
         <div className={styles['header-wrapper']}>
