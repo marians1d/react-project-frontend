@@ -1,20 +1,32 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { useOrderContext } from '../../../contexts/Order';
+import { useDispatch } from 'react-redux';
+
 import { OrderForm } from '../OrderForm/OrderForm';
+import { addOne, edit } from '../../../features/order/orderSlice';
 
 import * as orderService from '../../../services/order';
-
+import { useEffect, useState } from 'react';
 
 export const EditOrder = () => {
+    const [order, setOrder] = useState(false);
     const { orderId } = useParams();
     const navigate = useNavigate();
-    const { selectOrder, addOrder } = useOrderContext();
-    const order = selectOrder(orderId);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        orderService
+        .getOne(orderId)
+        .then((order) => {
+            setOrder(order);
+            
+            dispatch(edit(order));
+        });
+    }, [orderId, dispatch]);
 
     const orderHandler = (fields) => {
         orderService.edit(orderId, fields)
             .then((data) => {
-                addOrder(data);
+                dispatch(addOne(data));
 
                 navigate(`/orders/${data._id}`);
             })
@@ -25,7 +37,10 @@ export const EditOrder = () => {
 
     return (
         <section className="edit-order">
-            <OrderForm title={'Редактиране Поръчка'} submitHandler={orderHandler} order={order} />
+            {
+                order &&
+                <OrderForm title={'Редактиране Поръчка'} submitHandler={orderHandler} order={order} />
+            }
         </section>
     );
 };

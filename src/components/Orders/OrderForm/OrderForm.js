@@ -1,20 +1,22 @@
-import { useFormFields } from '../../../hooks//useFormFields';
+import { useFormFields } from '../../../hooks/useFormFields';
 import styles from './OrderForm.module.css';
 import validator from 'validator';
 
 export const OrderForm = ({ type, submitHandler, order, title }) => {
+    const initialState = {
+        title: { value: order?.title || '', error: false },
+        description: { value: order?.description || '', error: false },
+        address: { value: order?.address || '', error: false },
+        imageUrl: { value: order?.imageUrl || '', error: false },
+        visibility: { value: order?.visibility || 'public', error: false },
+    };
+
     const {
         fields,
         fieldChange,
         errorHandler,
         hasErrors,
-    } = useFormFields(order || {
-        title: { value: '', error: false },
-        description: { value: '', error: false },
-        address: { value: '', error: false },
-        imageUrl: { value: '', error: false },
-        visibility: { value: 'public', error: false },
-    });
+    } = useFormFields(initialState);
 
     const handleSubmit = (e) => {
         e.preventDefault();

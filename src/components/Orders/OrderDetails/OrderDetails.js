@@ -1,32 +1,30 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
-import { useAuthContext } from '../../../contexts/Auth';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { useOrderContext } from '../../../contexts/Order';
 import * as orderService from '../../../services/order';
+import { remove, edit } from '../../../features/order/orderSlice';
 
 import styles from './OrderDetails.module.css';
 
 export const OrderDetails = () => {
+    const [order, setOrder] = useState({});
     const navigate = useNavigate();
-    const { selectOrder, fetchOrderDetails, removeOrder, editOrder } = useOrderContext();
+    const dispatch = useDispatch();
     const { orderId } = useParams();
-    const { user } = useAuthContext();
+    const user = useSelector(state => state.user);
 
-
-    const currentOrder = selectOrder(orderId);
-
-    const isOwner = currentOrder.ownerId?._id === user._id;
+    const isOwner = order.ownerId?._id === user._id;
 
     useEffect(() => {
-        Promise.all([
-            orderService.getOne(orderId),
-        ]).then(([order]) => {
-            editOrder(orderId, order);
-
-            fetchOrderDetails(orderId, order);
+        orderService
+        .getOne(orderId)
+        .then((order) => {
+            setOrder(order);
+            
+            dispatch(edit(order));
         });
-    }, [orderId, fetchOrderDetails, editOrder]);
+    }, [orderId, dispatch]);
 
     const orderDeleteHandler = () => {
         const confirmation = window.confirm('Are you sure you want to delete this game?');
@@ -34,7 +32,7 @@ export const OrderDetails = () => {
         if (confirmation) {
             orderService.del(orderId)
                 .then(() => {
-                    removeOrder(orderId);
+                    dispatch(remove(orderId));
                     navigate('/orders');
                 });
         }
@@ -45,16 +43,16 @@ export const OrderDetails = () => {
         <div className={styles.container}>
             <section className={styles.details}>
                 <div className={styles.image}>
-                    <img src={currentOrder.imageUrl} alt={currentOrder.title} />
+                    <img src={order.imageUrl} alt={order.title} />
                 </div>
 
                 <div className={styles.info}>
-                    <h2>{currentOrder.title}</h2>
+                    <h2>{order.title}</h2>
 
-                    <p>{currentOrder.description}</p>
+                    <p>{order.description}</p>
 
                     {isOwner && <div className={styles.actions}>
-                        <Link className='btn btn-primary' to={`/orders/${currentOrder._id}/edit`}>Редактиране</Link>
+                        <Link className='btn btn-primary' to={`/orders/${order._id}/edit`}>Редактиране</Link>
                         <button className='btn btn-primary' onClick={orderDeleteHandler}>Изтрий</button>
                     </div>}
                 </div>

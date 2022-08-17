@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { useAuthContext } from "../../contexts/Auth";
+import { useSelector } from 'react-redux';
 import styles from './Home.module.css';
 
 export const Home = () => {
-    const { user } = useAuthContext();
+    const user = useSelector(state => state.user);
 
     return (
         <section className="">

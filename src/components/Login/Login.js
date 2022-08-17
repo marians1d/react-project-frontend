@@ -1,16 +1,16 @@
-import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import validator from 'validator';
+import { useDispatch } from 'react-redux';
+import { login } from '../../features/auth/authSlice';
 
 import { useFormFields } from '../../hooks/useFormFields';
 
-import { AuthContext } from '../../contexts/Auth';
 import * as authService from '../../services/auth';
 
 import styles from './Login.module.css';
 
 export const Login = () => {
-    const { loginUser } = useContext(AuthContext);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const {
@@ -31,7 +31,7 @@ export const Login = () => {
         authService.login(fields.email.value, fields.password.value)
             .then(authData => {
                 if (authData.status !== 'error') {
-                    loginUser(authData);
+                    dispatch(login(authData));
                     navigate('/');
                 }
             })

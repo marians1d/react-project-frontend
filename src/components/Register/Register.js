@@ -1,15 +1,16 @@
-import { useCallback, useContext, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import validator from 'validator';
-import { AuthContext } from '../../contexts/Auth';
 import { useFormFields } from '../../hooks/useFormFields';
+import { login } from '../../features/auth/authSlice';
 
 import * as authService from '../../services/auth';
 
 import styles from './Register.module.css';
 
 export const Register = () => {
-    const { loginUser } = useContext(AuthContext);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const { fields, fieldChange, errorHandler, hasErrors } = useFormFields({
         username: { value: '' },
@@ -27,7 +28,7 @@ export const Register = () => {
 
         authService.register(fields.username.value, fields.email.value, fields.password.value)
             .then(authData => {
-                loginUser(authData);
+                dispatch(login(authData));
                 navigate('/');
             })
             .catch((error) => {

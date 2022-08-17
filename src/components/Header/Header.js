@@ -1,10 +1,10 @@
 import { NavLink, Link } from 'react-router-dom';
-import { useAuthContext } from '../../contexts/Auth';
+import { useSelector } from 'react-redux';
 import styles from './Header.module.css';
 import { Profile } from './Profile/Profile';
 
 export const Header = () => {   
-    const { user } = useAuthContext();
+    const user = useSelector(state => state.user);
 
     return (
         <div className={styles['header-wrapper']}>
