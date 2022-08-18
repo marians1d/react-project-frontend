@@ -16,7 +16,11 @@ export const orderSlice = createSlice({
             state.orders.push(action.payload);
         },
         edit: (state, action) => {
-            state.orders = state.orders.map(x => x._id === action.payload._id ? action.payload : x);
+            if (state.orders.length === 0) {
+                state.orders.push(action.payload);
+            } else {
+                state.orders = state.orders.map(x => x._id === action.payload._id ? action.payload : x);
+            };
         },
         remove: (state, action) => {
             state.orders = state.orders.filter(x => x._id !== action.payload._id);
@@ -25,14 +29,14 @@ export const orderSlice = createSlice({
             state.isLoading = action.payload;
         },
         addComment: (state, action) => {
-            state.orders = state.map(x => x._id === action.payload.orderId
-                ? { ...x, comments: [...x.comments, action.payload.comment] }
+            state.orders = state.orders.map(x => x._id === action.payload.orderId
+                ? { ...x, comments: [action.payload, ...x.comments] }
                 : x
             );
         }
     }
 });
 
-export const { addAll, addOne, edit, addDetails, remove, setLoading } = orderSlice.actions;
+export const { addAll, addOne, edit, addDetails, remove, setLoading, addComment } = orderSlice.actions;
 
 export default orderSlice.reducer;

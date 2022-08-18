@@ -6,7 +6,7 @@ export const CommentList = ({ comments }) => {
             {comments.length === 0
                 ? <h2>Все още няма коментари</h2>
                 : <ul>
-                    {comments.map(c => <CommentItem comment={c} />)}
+                    {comments.map(c => <CommentItem key={c._id} comment={c} />)}
                 </ul>
             }
         </div>

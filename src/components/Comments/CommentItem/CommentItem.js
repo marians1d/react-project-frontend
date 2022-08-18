@@ -1,8 +1,14 @@
+import styles from './CommentItem.module.css';
 
-export const CommentItem = () => {
+export const CommentItem = ({ comment }) => {
     return (
-        <li>
-            <h2>comment</h2>
+        <li className={styles.comment}>
+            <div className={styles.author}>
+                <p>От {comment.userId.username}</p>
+            </div>
+            <div className={styles.content}>
+                <p>{comment.text}</p>
+            </div>
         </li>
     );
 };
