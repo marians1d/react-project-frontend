@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { OrderForm } from '../OrderForm/OrderForm';
 import * as orderService from '../../../services/order';
 import { addOne } from '../../../features/order/orderSlice';
+import { add } from '../../../features/error/errorSlice';
 
 export const CreateOrder = () => {
     const navigate = useNavigate();
@@ -17,8 +18,8 @@ export const CreateOrder = () => {
 
                 navigate(`/orders/${data._id}`);
             })
-            .catch(() => {
-                navigate('/404');
+            .catch((err) => {
+                dispatch(add(err));
             });
     };
 

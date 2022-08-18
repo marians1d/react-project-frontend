@@ -6,6 +6,7 @@ import { addOne, edit } from '../../../features/order/orderSlice';
 
 import * as orderService from '../../../services/order';
 import { useEffect, useState } from 'react';
+import { add } from '../../../features/error/errorSlice';
 
 export const EditOrder = () => {
     const [order, setOrder] = useState(false);
@@ -15,12 +16,12 @@ export const EditOrder = () => {
 
     useEffect(() => {
         orderService
-        .getOne(orderId)
-        .then((order) => {
-            setOrder(order);
-            
-            dispatch(edit(order));
-        });
+            .getOne(orderId)
+            .then((order) => {
+                setOrder(order);
+
+                dispatch(edit(order));
+            });
     }, [orderId, dispatch]);
 
     const orderHandler = (fields) => {
@@ -30,8 +31,8 @@ export const EditOrder = () => {
 
                 navigate(`/orders/${data._id}`);
             })
-            .catch(() => {
-                navigate('/404');
+            .catch((err) => {
+                dispatch(add(err));
             });
     };
 

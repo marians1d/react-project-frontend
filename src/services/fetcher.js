@@ -32,7 +32,7 @@ const fetcher = async (method, url, data) => {
         }
 
         if (response.status === 401) {
-            return localStorage.clear('auth');
+            localStorage.setItem('auth', JSON.stringify({}));
         }
 
         const result = await response.json();

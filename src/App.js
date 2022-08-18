@@ -13,6 +13,9 @@ import { OrderDetails } from './components/Orders/OrderDetails/OrderDetails';
 import { EditOrder } from './components/Orders/EditOrder/EditOrder';
 import { NoMatch } from './components/NoMatch';
 import { APIErrorNotification } from './components/APIErrorNotification/APIErrorNotification';
+import PrivateRoute from './components/common/PrivateRoute';
+import OrderOwner from './components/common/OrderOwner';
+import PublicRoute from './components/common/PublicRoute';
 
 function App() {
   return (
@@ -24,14 +27,26 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
+          <Route element={<PublicRoute/>} >
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+          </Route>
+          <Route element={<PrivateRoute />}>
+            <Route path="/logout" element={<Logout />} />
+          </Route>
 
           <Route path="/orders" element={<OrdersPage />} />
-          <Route path="/orders/create" element={<CreateOrder />} />
+          <Route path="/orders/create" element={
+            <PrivateRoute>
+              <CreateOrder />
+            </PrivateRoute>
+          } />
           <Route path="/orders/:orderId" element={<OrderDetails />} />
-          <Route path="/orders/:orderId/edit" element={<EditOrder />} />
+          <Route path="/orders/:orderId/edit" element={
+            <OrderOwner>
+              <EditOrder />
+            </OrderOwner>
+          } />
           <Route path="*" element={<NoMatch />} />
         </Routes>
       </main>

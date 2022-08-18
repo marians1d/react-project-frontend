@@ -2,14 +2,14 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 
-const PrivateRoute = ({children}) => {
+const PublicRoute = ({children}) => {
     const { isLogged } = useSelector(state => state.user);
-
-    if (!isLogged) {
-        return <Navigate to="/login" replace />;
+    
+    if (isLogged) {
+        return <Navigate to="/" replace />;
     }
 
     return children ? children : <Outlet />;
 };
 
-export default PrivateRoute;
+export default PublicRoute;
