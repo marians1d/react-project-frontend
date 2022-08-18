@@ -4,7 +4,7 @@ import styles from './Header.module.css';
 import { Profile } from './Profile/Profile';
 
 export const Header = () => {   
-    const user = useSelector(state => state.user);
+    const { isLogged } = useSelector(state => state.user);
 
     return (
         <div className={styles['header-wrapper']}>
@@ -49,7 +49,7 @@ export const Header = () => {
                 </ul>
 
                 <div className={styles.actions}>
-                    {user.email
+                    {isLogged
                         ? <div className={styles.right}>
                             <Link className={'btn btn-primary'} to='/orders/create'>
                                 Поръчай

@@ -5,9 +5,9 @@ export const authSlice = createSlice({
     initialState: localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth')) : {},
     reducers: {
         login: (state, action) => {
-            localStorage.setItem('auth', JSON.stringify(action.payload));
+            localStorage.setItem('auth', JSON.stringify({...action.payload, isLogged: !!action.payload._id}));
 
-            return action.payload;
+            return {...action.payload, isLogged: !!action.payload._id};
         },
         logout: (state) => {
             localStorage.setItem('auth', JSON.stringify({}));

@@ -10,12 +10,12 @@ import { CommentList } from './CommentList/CommentList';
 export const Comments = ({ orderId, comments }) => {
     const [comment, setComment] = useState('');
     const dispatch = useDispatch();
-    const user = useSelector(state => state.user);
+    const { isLogged } = useSelector(state => state.user);
 
     const handleComment = (e) => {
         e.preventDefault();
 
-        if (comment.length !== 0) {
+        if (comment.length !== 0 && isLogged) {
             commentService.create(orderId, comment)
                 .then((result) => {
                     dispatch(addComment(result));
@@ -31,7 +31,7 @@ export const Comments = ({ orderId, comments }) => {
 
     return (
         <section className={styles.comments}>
-            {user._id &&
+            {isLogged &&
                 <form onSubmit={handleComment}>
                     <label htmlFor="comment">Коментирай</label>
                     <textarea value={comment} onChange={commentChange} name="comment" id="comment" />

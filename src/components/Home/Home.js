@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import styles from './Home.module.css';
 
 export const Home = () => {
-    const user = useSelector(state => state.user);
+    const { isLogged } = useSelector(state => state.user);
 
     return (
         <section className="">
@@ -22,7 +22,7 @@ export const Home = () => {
                     </p>
 
                     <div>
-                        {user.email
+                        {isLogged
                             ? <>
                                 <Link className={'btn btn-primary'} to='/orders/create'>
                                     Поръчай
