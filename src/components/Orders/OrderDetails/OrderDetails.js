@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as orderService from '../../../services/order';
 import { remove, edit } from '../../../features/order/orderSlice';
 
+import { Comments } from '../../Comments/Comments';
+
 import styles from './OrderDetails.module.css';
 
 export const OrderDetails = () => {
@@ -57,6 +59,8 @@ export const OrderDetails = () => {
                     </div>}
                 </div>
             </section>
+
+            <Comments />
         </div>
     );
 };

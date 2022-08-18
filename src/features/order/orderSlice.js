@@ -10,7 +10,7 @@ export const orderSlice = createSlice({
     initialState,
     reducers: {
         addAll: (state, action) => {
-            state.orders = action.payload.map(o => ({...o, comments: []}));
+            state.orders = action.payload.map(o => ({ ...o, comments: [] }));
         },
         addOne: (state, action) => {
             state.orders.push(action.payload);
@@ -23,7 +23,13 @@ export const orderSlice = createSlice({
         },
         setLoading: (state, action) => {
             state.isLoading = action.payload;
-        } 
+        },
+        addComment: (state, action) => {
+            state.orders = state.map(x => x._id === action.payload.orderId
+                ? { ...x, comments: [...x.comments, action.payload.comment] }
+                : x
+            );
+        }
     }
 });
 
