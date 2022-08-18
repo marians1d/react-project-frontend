@@ -37,9 +37,13 @@ const fetcher = async (method, url, data) => {
 
         const result = await response.json();
 
+        if (result.status === 'error') {
+            throw result;
+        }
+
         return result;
     } catch (err) {
-        console.error(err);
+        throw err;
     }
 };
 

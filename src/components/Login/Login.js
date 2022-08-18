@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import validator from 'validator';
 import { useDispatch } from 'react-redux';
 import { login } from '../../features/auth/authSlice';
+import { add } from '../../features/error/errorSlice';
 
 import { useFormFields } from '../../hooks/useFormFields';
 
@@ -37,7 +38,7 @@ export const Login = () => {
             })
             .catch((error) => {
                 console.log(error);
-                navigate('/404');
+                dispatch(add(error));
             });
     };
 

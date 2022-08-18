@@ -8,6 +8,7 @@ import { login } from '../../features/auth/authSlice';
 import * as authService from '../../services/auth';
 
 import styles from './Register.module.css';
+import { add } from '../../features/error/errorSlice';
 
 export const Register = () => {
     const dispatch = useDispatch();
@@ -32,7 +33,7 @@ export const Register = () => {
                 navigate('/');
             })
             .catch((error) => {
-                console.log(error);
+                dispatch(add(error));
             });
     };
 

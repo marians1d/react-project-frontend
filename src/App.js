@@ -12,10 +12,12 @@ import { CreateOrder } from './components/Orders/CreateOrder/CreateOrder';
 import { OrderDetails } from './components/Orders/OrderDetails/OrderDetails';
 import { EditOrder } from './components/Orders/EditOrder/EditOrder';
 import { NoMatch } from './components/NoMatch';
+import { APIErrorNotification } from './components/APIErrorNotification/APIErrorNotification';
 
 function App() {
   return (
     <div className="App">
+      <APIErrorNotification />
       <Header />
 
       <main className='main'>
