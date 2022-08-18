@@ -1,0 +1,12 @@
+.orders-page {
+    margin-bottom: 80px;
+
+    .search {
+        display: flex;
+        margin-top: 100px;
+    }
+    
+    .pagination, .search {
+        justify-content: center;
+    }
+}

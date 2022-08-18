@@ -1,0 +1,28 @@
+.modal {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(112, 112, 112, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.body {
+    background-color: #fff;
+    font-weight: 500;
+    font-size: 1.2rem;
+    border-radius: 30px;
+    padding: 30px 40px;
+    border: 1px solid var(--main-gray-2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.body > :not(:last-child) {
+    margin-bottom: 20px;
+}
