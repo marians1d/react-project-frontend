@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 
-// import './OrdersPage.scss';
+import styles from './MyOrders.module.css';
 
 import { Search } from '../../Search/Search';
 import { OrderList } from '../OrderList/OrderList';
@@ -69,6 +69,8 @@ export const MyOrders = () => {
 
     return (
         <div className="orders-page">
+            <h2 className={styles.title}>Моите Поръчки</h2>
+
             <Search
                 submitHandler={submitHandler}
                 suggestionsHandler={suggestionsHandler}

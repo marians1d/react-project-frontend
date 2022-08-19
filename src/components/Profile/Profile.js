@@ -31,7 +31,10 @@ export const Profile = () => {
         data.append('profileImage', event.target.files[0]);
         authService.setImage(data).then((response) => {
             dispatch(updateUser({ profileImageUrl: response.profileImageUrl }));
-            dispatch(offLoading('user'));
+
+            setTimeout(() => {
+                dispatch(offLoading('user'));
+            }, 1500);
         });
     };
 
