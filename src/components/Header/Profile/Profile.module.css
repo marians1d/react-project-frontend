@@ -20,7 +20,7 @@
 	height: 0;
 	border-left: 5px solid transparent;
 	border-right: 5px solid transparent;
-	border-bottom: 7px solid var(--main-gray-2);
+	border-bottom: 7px solid #fff;
 }
 
 .icon {
@@ -31,10 +31,12 @@
 }
 
 .dropdown {
-    padding: 10px;
-    background-color: var(--main-gray-2);
+    
+    background-color: #fff;
+    border: 1px solid var(--main-gray-2);
     position: absolute;
     top: 45px;
+    width: 200px;
     right: 0;
     z-index: 1;
 
@@ -43,12 +45,28 @@
     border-radius: 5px;
 }
 
+.links {
+    padding: 10px;
+}
+
+.header {
+    padding: 6px 10px;
+    padding-bottom: 3px;
+    border-bottom: 2px solid var(--main-gray-2);
+}
+
 .link {
     display: block;
-    margin-bottom: 10px;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--main-gray-2);
     color: var(--primary-black);
 }
 
 .link:last-child {
-    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.link:first-child {
+    padding-top: 0;
 }

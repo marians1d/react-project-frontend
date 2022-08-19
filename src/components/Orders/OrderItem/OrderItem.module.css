@@ -3,8 +3,7 @@
     border-radius: 10px;
     width: calc((100% - 60px) / 3);
     flex-direction: column;
-    background-color: var(--main-gray-2);
-    border: 2px solid black;
+    border: 1px solid var(--main-gray-2);
     transition: box-shadow 500ms, transform 500ms;
 }
 
