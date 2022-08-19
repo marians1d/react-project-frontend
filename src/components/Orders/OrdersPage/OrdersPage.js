@@ -7,7 +7,8 @@ import './OrdersPage.scss';
 import { Search } from '../../Search/Search';
 import { OrderList } from '../OrderList/OrderList';
 import * as orderService from '../../../services/order';
-import { addAll, setLoading } from '../../../features/order/orderSlice';
+import { addAll } from '../../../features/order/orderSlice';
+import { onLoading, offLoading } from '../../../features/loading/loadingSlice';
 import Pagination from '../../Pagination/Pagination';
 
 
@@ -20,7 +21,7 @@ export const OrdersPage = () => {
     const dispatch = useDispatch();
 
     const submitHandler = (value) => {
-        dispatch(setLoading(true));
+        dispatch(onLoading('orders'));
 
         orderService.getAll({ page, search })
             .then(result => {
@@ -31,7 +32,7 @@ export const OrdersPage = () => {
 
                 setTotalCount(result.count);
 
-                dispatch(setLoading(false));
+                dispatch(offLoading('orders'));
             });
     };
 
@@ -43,21 +44,25 @@ export const OrdersPage = () => {
         setSearchParams({ page: page });
         setPage(page);
 
+        dispatch(onLoading('orders'));
+
         orderService.getAll({ page, search })
             .then(result => {
                 dispatch(addAll(result.orders));
 
-                dispatch(setLoading(false));
+                dispatch(offLoading('orders'));
 
                 setTotalCount(result.count);
             });
     };
 
     useEffect(() => {
+        dispatch(onLoading('orders'));
+
         orderService.getAll({ page, search })
             .then(result => {
                 dispatch(addAll(result.orders));
-                dispatch(setLoading(false));
+                dispatch(offLoading('orders'));
 
                 setTotalCount(result.count);
             });

@@ -14,7 +14,7 @@ export const OrderDetails = () => {
     const dispatch = useDispatch();
     const { orderId } = useParams();
     const user = useSelector(state => state.user);
-    const order = useSelector(state => state.orders.orders.find(order => order._id === orderId)) || {};
+    const order = useSelector(state => state.orders.find(order => order._id === orderId)) || {};
 
     const isOwner = order?.ownerId?._id === user._id;
 
