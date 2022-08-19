@@ -1,12 +1,10 @@
 import { useSelector } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserAstronaut } from '@fortawesome/free-solid-svg-icons';
 
-import styles from './Profile.module.css';
+import styles from './ProfileDropdown.module.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-export const Profile = () => {
+export const ProfileDropdown = () => {
     const user = useSelector(state => state.user);
     const [showDropdown, setDropdown] = useState(false);
 
@@ -19,7 +17,7 @@ export const Profile = () => {
     return (
         <div className={styles.profile}>
             <button className={styles.icon} onClick={toggleDropdown} >
-                <FontAwesomeIcon icon={faUserAstronaut} />
+                <img src={user.profileImageUrl} alt="" />
             </button>
 
             {showDropdown && <div className={styles.dropdown} onBlur={close}>

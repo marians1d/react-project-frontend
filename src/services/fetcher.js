@@ -1,6 +1,6 @@
 const baseUrl = process.env.API_URL || 'http://localhost:3001/api';
 
-const fetcher = async (method, url, data) => {
+const fetcher = async (method, url, data, isFormData = false) => {
     try {
         const user = localStorage.getItem('auth');
         const auth = JSON.parse(user || '{}');
@@ -9,6 +9,10 @@ const fetcher = async (method, url, data) => {
         if (auth.accessToken) {
             headers['x-authorization'] = auth.accessToken;
         }
+
+        if (!isFormData) {
+            headers['content-type'] = 'application/json';
+        }
         
         let options = { method };
         if (method === 'GET') {
@@ -16,11 +20,8 @@ const fetcher = async (method, url, data) => {
         } else {
             options = {
                 method,
-                headers: {
-                    ...headers,
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(data)
+                headers,
+                body: !isFormData ? JSON.stringify(data) : data
             };
         }
 

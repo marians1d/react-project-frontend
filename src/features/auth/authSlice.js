@@ -13,10 +13,13 @@ export const authSlice = createSlice({
             localStorage.setItem('auth', JSON.stringify({}));
 
             return {};
+        },
+        updateUser: (state, action) => {
+            return { ...state, ...action.payload };
         }
     },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { login, logout, updateUser } = authSlice.actions;
 
 export default authSlice.reducer;

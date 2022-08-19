@@ -1,7 +1,7 @@
 import { NavLink, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styles from './Header.module.css';
-import { Profile } from './Profile/Profile';
+import { ProfileDropdown } from './ProfileDropdown/ProfileDropdown';
 
 export const Header = () => {   
     const { isLogged } = useSelector(state => state.user);
@@ -54,7 +54,7 @@ export const Header = () => {
                             <Link className={'btn btn-primary'} to='/orders/create'>
                                 Поръчай
                             </Link>
-                            <Profile />
+                            <ProfileDropdown />
                         </div>
                         : <>
                             <Link className={'btn btn-secondary'} to="/login">

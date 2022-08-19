@@ -17,6 +17,7 @@ import PrivateRoute from './components/common/PrivateRoute';
 import OrderOwner from './components/common/OrderOwner';
 import PublicRoute from './components/common/PublicRoute';
 import { MyOrders } from './components/Orders/MyOrders/MyOrders';
+import { Profile } from './components/Profile/Profile';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
 
           <Route path="/orders" element={<OrdersPage />} />
           <Route element={<PrivateRoute />} >
+            <Route path="/profile" element={<Profile />} />
             <Route path="/my-orders" element={<MyOrders />} />
             <Route path="/orders/create" element={<CreateOrder />} />
           </Route>
