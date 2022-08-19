@@ -18,12 +18,14 @@ export const OrderDetails = () => {
 
     const isOwner = order?.ownerId?._id === user._id;
 
+    console.log(order);
+
     useEffect(() => {
         orderService
-        .getOne(orderId)
-        .then((result) => {
-            dispatch(edit(result));
-        });
+            .getOne(orderId)
+            .then((result) => {
+                dispatch(edit(result));
+            });
     }, [orderId, dispatch]);
 
     const orderDeleteHandler = () => {
@@ -51,6 +53,13 @@ export const OrderDetails = () => {
 
                     <p>{order?.description}</p>
 
+                    <div className={styles.author}>
+                        <img src={order?.ownerId?.profileImageUrl} alt={order?.ownerId?.profileImageUrl} />
+                        <div className={styles['author-info']}>
+                            <p>От {order.ownerId.username}</p>
+                        </div>
+                    </div>
+
                     {isOwner && <div className={styles.actions}>
                         <Link className='btn btn-primary' to={`/orders/${order?._id}/edit`}>Редактиране</Link>
                         <button className='btn btn-primary' onClick={orderDeleteHandler}>Изтрий</button>
@@ -58,7 +67,7 @@ export const OrderDetails = () => {
                 </div>
             </section>
 
-            <Comments orderId={orderId} comments={order?.comments || []}/>
+            <Comments orderId={orderId} comments={order?.comments || []} />
         </div>
     );
 };

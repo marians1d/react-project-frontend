@@ -46,6 +46,27 @@
     margin-bottom: auto;
 }
 
+.author {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+
+    padding-bottom: 10px;
+
+    border-bottom: 1px solid var(--main-gray-2);
+}
+
+.author img {
+    border: 2px solid black;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+}
+
+.author-info {
+    font-size: 1.2rem;
+}
+
 .actions {
     display: flex;
 }
