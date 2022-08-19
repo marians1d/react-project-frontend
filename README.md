@@ -5,6 +5,7 @@
 | [General info](#general-info)
 | [Technologies](#technologies)
 | [Setup](#setup)
+| [Authentication](#authentication)
 
 ## General info
 This project is front-end application. The main purpose is to order custom furniture with ideas and image ideas.
