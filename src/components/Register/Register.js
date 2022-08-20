@@ -27,14 +27,19 @@ export const Register = () => {
     const registerHandler = (event) => {
         event.preventDefault();
 
-        authService.register(fields.username.value, fields.email.value, fields.password.value)
-            .then(authData => {
-                dispatch(login(authData));
-                navigate('/');
-            })
-            .catch((error) => {
-                dispatch(add(error));
-            });
+        if (fields.password.value === fields.rePass.value) {
+            authService.register(fields.username.value, fields.email.value, fields.password.value)
+                .then(authData => {
+                    dispatch(login(authData));
+                    navigate('/');
+                })
+                .catch((error) => {
+                    dispatch(add(error));
+                });
+        } else {
+            setSamePasswords(false);
+        }
+
     };
 
     const checkError = useCallback((event) => {
@@ -138,7 +143,7 @@ export const Register = () => {
                         }
                     </div>
 
-                    <button disabled={!touchedAll || hasErrors} className='btn btn-primary'>Регистрирай се</button>
+                    <button disabled={!samePasswords || !touchedAll || hasErrors} className='btn btn-primary'>Регистрирай се</button>
 
                     <p>Вече имате регистрация <Link to='/login'>Вход</Link></p>
                 </form>
