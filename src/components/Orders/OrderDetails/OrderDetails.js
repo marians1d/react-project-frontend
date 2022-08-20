@@ -1,7 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import classNames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 import * as orderService from '../../../services/order';
 import { remove, edit } from '../../../features/order/orderSlice';
@@ -11,6 +13,7 @@ import { Comments } from '../../Comments/Comments';
 import styles from './OrderDetails.module.css';
 
 export const OrderDetails = () => {
+    const [activeImage, setActiveImage] = useState(0);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { orderId } = useParams();
@@ -18,6 +21,14 @@ export const OrderDetails = () => {
     const order = useSelector(state => state.orders.find(order => order._id === orderId)) || {};
 
     const isOwner = order?.ownerId?._id === user._id;
+
+    const nextImage = () => {
+        setActiveImage((old) => old + 1);
+    };
+
+    const prevImage = () => {
+        setActiveImage((old) => old - 1);
+    };
 
     useEffect(() => {
         orderService
@@ -39,12 +50,36 @@ export const OrderDetails = () => {
         }
     };
 
+    let imageSection;
+
+    if (!order?.imageUrls || order.imageUrls.length === 0) {
+        imageSection = <img className={classNames(styles.image, styles.active)} src={'https://drive.google.com/uc?id=1I9jpeAJRiWcDfGpPth-zphUrFZdja-xe'} alt={'Default'} />
+    } else if (order.imageUrls.length === 1) {
+        imageSection = <img className={classNames(styles.image, styles.active)} src={order.imageUrls[0]} alt={order.imageUrls[0]} />
+    } else {
+        imageSection = <>
+            <div className={styles.prev}>
+                <button onClick={prevImage} disabled={activeImage <= 0} className={classNames('btn', 'btn-primary')}>
+                    <FontAwesomeIcon icon={faArrowLeft} />
+                </button>
+            </div>
+            {
+                order.imageUrls.map((image, i) => <img key={image} className={classNames(styles.image, i === activeImage ? styles.active : '')} src={image} alt={image} />)
+            }
+            <div className={styles.next}>
+
+                <button onClick={nextImage} disabled={activeImage >= order.imageUrls.length - 1} className={classNames('btn', 'btn-primary')}>
+                    <FontAwesomeIcon icon={faArrowRight} />
+                </button>
+            </div>
+        </>
+    }
 
     return (
         <div className={styles.container}>
             <section className={styles.details}>
-                <div className={styles.image}>
-                    <img src={order?.imageUrl} alt={order?.title} />
+                <div className={styles['image-section']}>
+                    { imageSection }
                 </div>
 
                 <div className={styles.info}>
@@ -53,7 +88,7 @@ export const OrderDetails = () => {
                     <p>{order?.description}</p>
 
                     <div className={styles.author}>
-                        <div className={classNames(styles.icon,'icon')}>
+                        <div className={classNames(styles.icon, 'icon')}>
                             <img src={order?.ownerId?.profileImageUrl} alt={order?.ownerId?.profileImageUrl} />
                         </div>
                         <div className={styles['author-info']}>

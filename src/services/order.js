@@ -48,6 +48,6 @@ export const create = (orderData) => fetcher.post(folderUrl, orderData);
 
 export const edit = (orderId, orderData) => fetcher.put(`${folderUrl}/${orderId}`, orderData);
 
-export const addFile = (formData) => fetcher.post(folderUrl, formData, false);
+export const addFile = async (formData) => fetcher.post(`${folderUrl}/image`, formData, true);
 
 export const del = (orderId) => fetcher.del(`${folderUrl}/${orderId}`);

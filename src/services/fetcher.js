@@ -1,4 +1,4 @@
-const baseUrl = process.env.API_URL || 'https://custom-furniture.herokuapp.com/api';
+const baseUrl = 'http://localhost:3001/api';
 
 const fetcher = async (method, url, data, isFormData = false) => {
     try {

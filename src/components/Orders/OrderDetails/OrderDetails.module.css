@@ -12,16 +12,40 @@
     gap: 60px;
 }
 
-.image {
+.image-section {
     height: 450px;
     width: 55%;
     object-fit: contain;
+    position: relative;
 }
 
-.image img {
+.image-section .prev {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.image-section .next {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.image-section .image {
+    display: none;
     width: 100%;
     height: 100%;
     object-fit: contain;
+}
+
+.image.active {
+    display: block;
 }
 
 .info {
