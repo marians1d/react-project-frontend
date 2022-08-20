@@ -70,8 +70,8 @@ export const OrderDetails = () => {
             {
                 order.imageUrls.map((image, i) => <img key={image} className={classNames(styles.image, i === activeImage ? styles.active : '')} src={image} alt={image} />)
             }
-            <div className={styles.next}>
-                <div onClick={nextImage} className={classNames(styles.icon)}>
+            <div onClick={nextImage} className={styles.next}>
+                <div className={classNames(styles.icon)}>
                     <FontAwesomeIcon icon={faArrowRight} />
                 </div>
             </div>
