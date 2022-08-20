@@ -109,6 +109,11 @@ a {
   background-color: var(--primary-black-2);
 }
 
+.btn-primary:disabled {
+  background-color: rgb(163, 163, 163);
+  cursor: not-allowed;
+}
+
 .btn-secondary {
   color: var(--primary-black);
   border: 2px solid black;
