@@ -16,6 +16,8 @@ import { APIErrorNotification } from './components/APIErrorNotification/APIError
 import PrivateRoute from './components/common/PrivateRoute';
 import OrderOwner from './components/common/OrderOwner';
 import PublicRoute from './components/common/PublicRoute';
+import { MyOrders } from './components/Orders/MyOrders/MyOrders';
+import { Profile } from './components/Profile/Profile';
 
 function App() {
   return (
@@ -27,7 +29,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route element={<PublicRoute/>} >
+          <Route element={<PublicRoute />} >
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
           </Route>
@@ -36,11 +38,11 @@ function App() {
           </Route>
 
           <Route path="/orders" element={<OrdersPage />} />
-          <Route path="/orders/create" element={
-            <PrivateRoute>
-              <CreateOrder />
-            </PrivateRoute>
-          } />
+          <Route element={<PrivateRoute />} >
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/my-orders" element={<MyOrders />} />
+            <Route path="/orders/create" element={<CreateOrder />} />
+          </Route>
           <Route path="/orders/:orderId" element={<OrderDetails />} />
           <Route path="/orders/:orderId/edit" element={
             <OrderOwner>

@@ -13,7 +13,7 @@
 }
 
 .image {
-    height: 400px;
+    height: 450px;
     width: 55%;
     object-fit: contain;
 }
@@ -44,6 +44,25 @@
 .info p {
     word-break: break-all;
     margin-bottom: auto;
+}
+
+.author {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+
+    padding-bottom: 10px;
+
+    border-bottom: 1px solid var(--main-gray-2);
+}
+
+.author .icon {
+    width: 46px;
+    height: 46px;
+}
+
+.author-info {
+    font-size: 1.2rem;
 }
 
 .actions {

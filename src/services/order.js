@@ -23,6 +23,25 @@ export const getAll = ({page, search} = {}) => {
     return fetcher.get(url);
 };
 
+export const getPersonal = ({page, search} = {}) => {
+    let url = folderUrl + '/personal';
+
+    if (page || search) {
+        url += '?';
+    }
+
+    if (page) {
+        url += `page=${page}`;
+    }
+
+    if (search) {
+        url += page ? '&' : '';
+        url += `search=${encodeURIComponent(search)}&criteria=title`;
+    }
+
+    return fetcher.get(url);
+};
+
 export const getOne = (orderId) => fetcher.get(`${folderUrl}/${orderId}`);
 
 export const create = (orderData) => fetcher.post(folderUrl, orderData);

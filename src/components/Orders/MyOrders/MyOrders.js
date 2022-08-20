@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 
-import './OrdersPage.scss';
+import styles from './MyOrders.module.css';
 
 import { Search } from '../../Search/Search';
 import { OrderList } from '../OrderList/OrderList';
@@ -11,8 +11,7 @@ import { addAll } from '../../../features/order/orderSlice';
 import { onLoading, offLoading } from '../../../features/loading/loadingSlice';
 import Pagination from '../../Pagination/Pagination';
 
-
-export const OrdersPage = () => {
+export const MyOrders = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [page, setPage] = useState(searchParams.get('page'));
     const [search, setSearch] = useState(searchParams.get('q'));
@@ -23,7 +22,7 @@ export const OrdersPage = () => {
     const submitHandler = (value) => {
         dispatch(onLoading('orders'));
 
-        orderService.getAll({ page, search })
+        orderService.getPersonal({ page, search })
             .then(result => {
                 setSearch(value);
                 setSearchParams({ search: value });
@@ -46,7 +45,7 @@ export const OrdersPage = () => {
 
         dispatch(onLoading('orders'));
 
-        orderService.getAll({ page, search })
+        orderService.getPersonal({ page, search })
             .then(result => {
                 dispatch(addAll(result.orders));
 
@@ -58,8 +57,8 @@ export const OrdersPage = () => {
 
     useEffect(() => {
         dispatch(onLoading('orders'));
-
-        orderService.getAll({ page, search })
+            
+        orderService.getPersonal({ page, search })
             .then(result => {
                 dispatch(addAll(result.orders));
                 dispatch(offLoading('orders'));
@@ -70,6 +69,8 @@ export const OrdersPage = () => {
 
     return (
         <div className="orders-page">
+            <h2 className={styles.title}>Моите Поръчки</h2>
+
             <Search
                 submitHandler={submitHandler}
                 suggestionsHandler={suggestionsHandler}

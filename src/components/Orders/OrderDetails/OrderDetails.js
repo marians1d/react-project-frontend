@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import classNames from 'classnames';
 
 import * as orderService from '../../../services/order';
 import { remove, edit } from '../../../features/order/orderSlice';
@@ -14,16 +15,18 @@ export const OrderDetails = () => {
     const dispatch = useDispatch();
     const { orderId } = useParams();
     const user = useSelector(state => state.user);
-    const order = useSelector(state => state.orders.orders.find(order => order._id === orderId)) || {};
+    const order = useSelector(state => state.orders.find(order => order._id === orderId)) || {};
 
     const isOwner = order?.ownerId?._id === user._id;
 
+    console.log(order);
+
     useEffect(() => {
         orderService
-        .getOne(orderId)
-        .then((result) => {
-            dispatch(edit(result));
-        });
+            .getOne(orderId)
+            .then((result) => {
+                dispatch(edit(result));
+            });
     }, [orderId, dispatch]);
 
     const orderDeleteHandler = () => {
@@ -51,6 +54,15 @@ export const OrderDetails = () => {
 
                     <p>{order?.description}</p>
 
+                    <div className={styles.author}>
+                        <div className={classNames(styles.icon,'icon')}>
+                            <img src={order?.ownerId?.profileImageUrl} alt={order?.ownerId?.profileImageUrl} />
+                        </div>
+                        <div className={styles['author-info']}>
+                            <p>От {order?.ownerId?.username}</p>
+                        </div>
+                    </div>
+
                     {isOwner && <div className={styles.actions}>
                         <Link className='btn btn-primary' to={`/orders/${order?._id}/edit`}>Редактиране</Link>
                         <button className='btn btn-primary' onClick={orderDeleteHandler}>Изтрий</button>
@@ -58,7 +70,7 @@ export const OrderDetails = () => {
                 </div>
             </section>
 
-            <Comments orderId={orderId} comments={order?.comments || []}/>
+            <Comments orderId={orderId} comments={order?.comments || []} />
         </div>
     );
 };

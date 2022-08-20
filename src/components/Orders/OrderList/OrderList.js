@@ -7,7 +7,8 @@ import styles from './OrderList.module.css';
 
 export const OrderList = () => {
     const [searchParams] = useSearchParams();
-    const { orders, isLoading } = useSelector(state => state.orders);
+    const orders = useSelector(state => state.orders);
+    const isLoading = useSelector(state => state.loading.orders);
 
     let component;
 

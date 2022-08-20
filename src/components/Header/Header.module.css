@@ -31,6 +31,10 @@
     color: var(--main-gray);
 }
 
+.right {
+    align-items: center;
+}
+
 .links a {
     transition: color 400ms;
 }
