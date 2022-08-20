@@ -1,6 +1,7 @@
 import { createRef, useState } from 'react';
 import validator from 'validator';
 import classNames from 'classnames';
+import { ClipLoader } from 'react-spinners';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons';
@@ -152,7 +153,7 @@ export const OrderForm = ({ type, submitHandler, order, title }) => {
                         <label htmlFor="image">Снимки</label>
 
                         {
-                            imageUrls.map(image => {
+                            imageUrls.map((image, i) => {
                                 return (
                                     <div key={image} className={styles.image}>
                                         <div className={styles.background}>
@@ -160,6 +161,12 @@ export const OrderForm = ({ type, submitHandler, order, title }) => {
                                                 <FontAwesomeIcon icon={faX} />
                                             </button>
                                         </div>
+
+                                        {isLoading &&
+                                            <div className={styles['spinner-background']}>
+                                                <div className={styles.spinner} ><ClipLoader /></div>
+                                            </div>
+                                        }
                                         <img src={image} alt={image} key={image} />
                                     </div>
                                 );
