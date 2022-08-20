@@ -23,11 +23,15 @@ export const OrderDetails = () => {
     const isOwner = order?.ownerId?._id === user._id;
 
     const nextImage = () => {
-        setActiveImage((old) => old + 1);
+        if (order?.imageUrls && activeImage < order.imageUrls.length - 1) {
+            setActiveImage((old) => old + 1);
+        }
     };
 
     const prevImage = () => {
-        setActiveImage((old) => old - 1);
+        if (activeImage > 0) {
+            setActiveImage((old) => old - 1);
+        }
     };
 
     useEffect(() => {
@@ -53,33 +57,32 @@ export const OrderDetails = () => {
     let imageSection;
 
     if (!order?.imageUrls || order.imageUrls.length === 0) {
-        imageSection = <img className={classNames(styles.image, styles.active)} src={'https://drive.google.com/uc?id=1I9jpeAJRiWcDfGpPth-zphUrFZdja-xe'} alt={'Default'} />
+        imageSection = <img className={classNames(styles.image, styles.active)} src={'https://drive.google.com/uc?id=1I9jpeAJRiWcDfGpPth-zphUrFZdja-xe'} alt={'Default'} />;
     } else if (order.imageUrls.length === 1) {
-        imageSection = <img className={classNames(styles.image, styles.active)} src={order.imageUrls[0]} alt={order.imageUrls[0]} />
+        imageSection = <img className={classNames(styles.image, styles.active)} src={order.imageUrls[0]} alt={order.imageUrls[0]} />;
     } else {
         imageSection = <>
-            <div className={styles.prev}>
-                <button onClick={prevImage} disabled={activeImage <= 0} className={classNames('btn', 'btn-primary')}>
+            <div onClick={prevImage} className={styles.prev}>
+                <div className={classNames(styles.icon)}>
                     <FontAwesomeIcon icon={faArrowLeft} />
-                </button>
+                </div>
             </div>
             {
                 order.imageUrls.map((image, i) => <img key={image} className={classNames(styles.image, i === activeImage ? styles.active : '')} src={image} alt={image} />)
             }
             <div className={styles.next}>
-
-                <button onClick={nextImage} disabled={activeImage >= order.imageUrls.length - 1} className={classNames('btn', 'btn-primary')}>
+                <div onClick={nextImage} className={classNames(styles.icon)}>
                     <FontAwesomeIcon icon={faArrowRight} />
-                </button>
+                </div>
             </div>
-        </>
+        </>;
     }
 
     return (
         <div className={styles.container}>
             <section className={styles.details}>
                 <div className={styles['image-section']}>
-                    { imageSection }
+                    {imageSection}
                 </div>
 
                 <div className={styles.info}>
