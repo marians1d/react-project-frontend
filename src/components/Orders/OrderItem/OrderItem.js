@@ -2,8 +2,6 @@ import { Link } from 'react-router-dom';
 import styles from './OrderItem.module.css';
 
 export const OrderItem = ({ order }) => {
-    console.log(order);
-
     return (
         <div className={styles['order-card']}>
             <Link to={`/orders/${order._id}`}>

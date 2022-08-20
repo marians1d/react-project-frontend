@@ -14,7 +14,7 @@ import Pagination from '../../Pagination/Pagination';
 
 export const OrdersPage = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const [page, setPage] = useState(searchParams.get('page'));
+    const [page, setPage] = useState(Number(searchParams.get('page')) || 1);
     const [search, setSearch] = useState(searchParams.get('q'));
 
     const [totalCount, setTotalCount] = useState(0);

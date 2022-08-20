@@ -1,0 +1,15 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.about {
+    margin-top: 100px;
+    max-width: 500px;
+    font-size: 1.2rem;
+}
+
+.about :not(:last-child) {
+    margin-bottom: 20px;
+}
