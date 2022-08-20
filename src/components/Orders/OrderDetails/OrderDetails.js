@@ -19,8 +19,6 @@ export const OrderDetails = () => {
 
     const isOwner = order?.ownerId?._id === user._id;
 
-    console.log(order);
-
     useEffect(() => {
         orderService
             .getOne(orderId)

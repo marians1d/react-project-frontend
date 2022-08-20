@@ -36,6 +36,7 @@
 }
 
 .info {
+    background-color: #fff;
     padding: 30px 40px;
     border-radius: 30px;
     border: 1px solid var(--main-gray-2);
