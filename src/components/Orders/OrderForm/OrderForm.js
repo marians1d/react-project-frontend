@@ -2,6 +2,8 @@ import { createRef, useState } from 'react';
 import validator from 'validator';
 import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faX } from '@fortawesome/free-solid-svg-icons';
 
 import { useFormFields } from '../../../hooks/useFormFields';
 import styles from './OrderForm.module.css';
@@ -58,6 +60,10 @@ export const OrderForm = ({ type, submitHandler, order, title }) => {
             }, 1500);
 
         });
+    };
+
+    const removeFile = (image) => {
+        setImageUrls((urls) => urls.filter((url) => url !== image));
     };
 
     const touchedAll = fields.title.value !== '' && fields.description.value !== '' && fields.address.value !== '' && fields.visibility.value !== '';
@@ -148,10 +154,15 @@ export const OrderForm = ({ type, submitHandler, order, title }) => {
                         {
                             imageUrls.map(image => {
                                 return (
-                                    <div className={styles.image}>
+                                    <div key={image} className={styles.image}>
+                                        <div className={styles.background}>
+                                            <button type='button' onClick={() => removeFile(image)} className={styles.button}>
+                                                <FontAwesomeIcon icon={faX} />
+                                            </button>
+                                        </div>
                                         <img src={image} alt={image} key={image} />
                                     </div>
-                                );  
+                                );
                             })
                         }
 
@@ -159,7 +170,7 @@ export const OrderForm = ({ type, submitHandler, order, title }) => {
                         <button type={'button'} disabled={isLoading} className={classNames(styles.button, styles.image, 'btn', 'btn-primary')} onClick={handleFile}>Добави Снимка</button>
                     </div>
 
-                    <button disabled={!touchedAll || hasErrors} className='btn btn-primary'>{type === 'create' ? 'Създай' : 'Запази'}</button>
+                    <button disabled={!touchedAll || (hasErrors && !order) || (order?.imageUrls && order?.imageUrls.join('') === imageUrls.join(''))} className='btn btn-primary'>{type === 'create' ? 'Създай' : 'Запази'}</button>
                 </form>
             </div>
         </div>

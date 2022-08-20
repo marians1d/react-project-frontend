@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3001/api';
+const baseUrl = false ? 'https://custom-furniture.herokuapp.com/api' : 'http://localhost:3001/api';
 
 const fetcher = async (method, url, data, isFormData = false) => {
     try {
