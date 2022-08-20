@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import classNames from 'classnames';
 
 import * as orderService from '../../../services/order';
 import { remove, edit } from '../../../features/order/orderSlice';
@@ -54,9 +55,11 @@ export const OrderDetails = () => {
                     <p>{order?.description}</p>
 
                     <div className={styles.author}>
-                        <img src={order?.ownerId?.profileImageUrl} alt={order?.ownerId?.profileImageUrl} />
+                        <div className={classNames(styles.icon,'icon')}>
+                            <img src={order?.ownerId?.profileImageUrl} alt={order?.ownerId?.profileImageUrl} />
+                        </div>
                         <div className={styles['author-info']}>
-                            <p>От {order.ownerId.username}</p>
+                            <p>От {order?.ownerId?.username}</p>
                         </div>
                     </div>
 

@@ -16,7 +16,7 @@ export const ProfileDropdown = () => {
 
     return (
         <div className={styles.profile}>
-            <button className={styles.icon} onClick={toggleDropdown} >
+            <button className="icon" onClick={toggleDropdown} >
                 <img src={user.profileImageUrl} alt="" />
             </button>
 
