@@ -79,7 +79,7 @@ export const OrdersPage = () => {
                 className='pagination'
                 currentPage={page}
                 totalCount={totalCount}
-                pageSize={5}
+                pageSize={6}
                 onPageChange={pageHandler}
             />
         </div>
